@@ -2,13 +2,14 @@
 //* --------------------------------------------------
 
 // const express = require('express'); // Common JS
-import {} from 'dotenv/config';
+import { } from 'dotenv/config';
 import cors from 'cors';
 
 import express from 'express'; // ES6
 import connectDB from './db/connectdb.js';
 import web from './routes/web.js';
-import { join } from 'path';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import './models/Student.js';
 
 const app = express();
@@ -31,12 +32,18 @@ app.use(express.json({ limit: '10kb' }));
 //# /////////////////////////////////////////
 //* Accessing Static files:
 // app.use(express.static("public"));
-app.use('/', express.static(join(process.cwd(), 'public')));
+//app.use('/', express.static(join(process.cwd(), 'public')));
 // app.use('/css', express.static(join(process.cwd(), 'public')));
 // app.use('/js', express.static(join(process.cwd(), 'public')));
+//app.use('/student', express.static(join(process.cwd(), 'public')));
+//app.use('/student/edit', express.static(join(process.cwd(), 'public')));
 
-app.use('/student', express.static(join(process.cwd(), 'public')));
-app.use('/student/edit', express.static(join(process.cwd(), 'public')));
+//* ES module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/student', express.static(path.join(process.cwd(), 'public')));
+app.use('/student/edit', express.static(path.join(process.cwd(), 'public')));
 
 //# /////////////////////////////////////////
 //* Setting which 'template engine name' we are using like: ejs.
@@ -44,11 +51,8 @@ app.set('view engine', 'ejs');
 
 //# /////////////////////////////////////////
 //* Loading Routes:
-app.get('/', (req, res) => {
-  res.render('welcome');
-});
+app.use('/', web);
 
-app.use('/student', web);
 //# ////////////////////////////////////////////
 //* Server listening the request:
 app.listen(port, () => {

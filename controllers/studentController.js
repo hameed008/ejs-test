@@ -2,6 +2,12 @@
 import studentModel from "../models/Student.js";
 
 class StudentController {
+  // Display Welcome Page :
+  static homePage = async (req, res) => {
+    res.render("index");
+  };
+
+
   // Create Document:
   static createDoc = async (req, res) => {
     console.log("Create Doc Post Method");
@@ -38,7 +44,7 @@ class StudentController {
     try {
       const result = await studentModel.find();
       //console.log(result);
-      res.render("index", { data: result });
+      res.render("dashboard", { data: result });
     } catch (error) {
       console.log(error);
     }

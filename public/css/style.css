@@ -1,3 +1,36 @@
-.link {
-  color: red;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+body {
+  width: 100%;
+  height: calc(100vh - 90px);
+  font-family: sans-serif;
+}
+h1 {
+  color: #fff;
+  font-weight: 600;
+}
+nav {
+  min-height: 90px;
+  background-color: #013417;
+}
+
+.app-name {
+  color: #ff8f00;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.app-name:hover {
+}
+.home-container {
+  background: linear-gradient(to right, rgb(13, 110, 13), rgb(12, 170, 12));
+}
+
+.menu ul li a:link {
+  color: rgb(255, 0, 140);
+}
+/* .dashboard:active {
+  color: gray;
+} */
